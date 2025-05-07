@@ -1,9 +1,9 @@
 <app-header/>
 <main>
-  <div class="flex justify-between w-full gap-10">
+  <div class="flex w-full gap-10">
     <ul id="users">
       <li *ngFor="let user of DUMMY_USERS">
-        <app-user [user]="user" (selected)="selectedUserFnc($event)"></app-user>
+        <app-user [user]="user" [selecteUserId]="selectedUser?.id" (selected)="selectedUserFnc($event)"></app-user>
       </li>
     </ul>
     <div *ngIf="selectedUser; else elseBlock">

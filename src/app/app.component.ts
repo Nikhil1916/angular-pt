@@ -18,8 +18,8 @@ export class AppComponent {
   DUMMY_USERS = DUMMY_USERS;
   selectedUser:any;
   selectedUserFnc(event:any)   {
-    console.log(event);
+    // console.log(event);
     this.selectedUser = DUMMY_USERS.find(_=>_.id == event);
-    console.log(this.selectedUser);
+    // console.log(this.selectedUser);
   }
 }
