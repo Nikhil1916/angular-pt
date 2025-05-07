@@ -3,7 +3,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "strict": true,
+    "strictNullChecks": false,  // Add or change this line
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": false
   },
   "files": [
     "src/main.ts"
