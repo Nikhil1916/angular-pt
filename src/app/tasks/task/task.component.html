@@ -3,7 +3,7 @@
     <h2>{{Task.title}}</h2>
     <time>{{Task.dueDate | date}}</time>
     <p>{{Task.summary}}</p>
-    <p class="actions" (click)="completeTask()">
+    <p class="actions" (click)="completeTask(Task.id)">
       <button>Complete</button>
     </p>
   </article>

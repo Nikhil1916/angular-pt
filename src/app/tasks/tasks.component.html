@@ -9,9 +9,9 @@
     <ul>
       @for (task of selectedUserTasks; track task.id) {
         <li>
-          <app-task [Task]="task" (completedTaskId)="completeTask($event)" />
+          <app-task [Task]="task" />
         </li>
       }
     </ul>
   </section>
-  <app-add-task [isOpen]="isCreateTask" (close)="closeTaskCreation()" (addTask)="onAddTask($event)"></app-add-task>
+  <app-add-task [userId]="this.user()?.id" [isOpen]="isCreateTask" (close)="closeTaskCreation()"></app-add-task>

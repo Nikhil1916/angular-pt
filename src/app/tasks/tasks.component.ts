@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
-import { dummyTasks } from '../../assets/constants/dummy-tasks';
 import { ModalComponent } from "./add-task/modal.component";
-import { NewTaskData } from './task.model';
+import { NewTaskData, Task } from './task.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -12,15 +12,14 @@ import { NewTaskData } from './task.model';
   styleUrl: './tasks.component.scss'
 })
 export class TasksComponent {
-  user = input.required<any>();
-  DUMMY_TASKS = dummyTasks;
-  isCreateTask:boolean = false;
-  get selectedUserTasks() {
-    return this.DUMMY_TASKS.filter((_:any)=>_.userId == this.user().id);
+  constructor(private taskS:TasksService) {
+    
   }
+  user = input.required<any>();
+  isCreateTask:boolean = false;
 
-  completeTask(id:string) {
-    this.DUMMY_TASKS = this.DUMMY_TASKS.filter(_=>_.id!=id);
+  get selectedUserTasks() {
+    return this.taskS.getUserTask(this.user().id);
   }
 
   addTask() {
@@ -30,12 +29,8 @@ export class TasksComponent {
   closeTaskCreation() {
     this.isCreateTask = false;
   }
-  onAddTask(data:NewTaskData) {
-    this.DUMMY_TASKS.unshift({
-      ...data,
-      userId:this.user()?.id,
-      id:new Date().getTime().toString(),
-    });
-    this.isCreateTask = false;
+
+  removeTask(id:string) {
+    this.taskS.completeTask(id);
   }
 }

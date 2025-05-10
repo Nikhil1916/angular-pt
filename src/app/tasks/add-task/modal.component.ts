@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component , EventEmitter, Input, Output } from '@angular/core';
+import { Component , EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NewTaskData } from '../task.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-add-task',
@@ -11,9 +12,10 @@ import { NewTaskData } from '../task.model';
   styleUrl: './modal.component.scss'
 })
 export class ModalComponent {
+  @Input({required:true}) userId!:string;
   @Input() isOpen:boolean = false;
   @Output() close = new EventEmitter<boolean>();
-  @Output() addTask = new EventEmitter<NewTaskData>();
+  private taskS = inject(TasksService);
   title= "";
   summary = "";
   dueDate = "";
@@ -22,10 +24,13 @@ export class ModalComponent {
   }
 
   onSubmit() {
-    this.addTask.emit({
+    this.taskS.addTask({
       title:this.title,
       summary:this.summary,
-      dueDate:this.dueDate
-    })
+      dueDate:this.dueDate,
+      userId:this.userId,
+      id:new Date().getTime().toString(),
+    });
+    this.closeModal();
   }
 }

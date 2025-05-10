@@ -18,6 +18,6 @@ export class UserComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-      console.log(this.selecteUserId, this.user);
+      // console.log(this.selecteUserId, this.user);
   }
 }
