@@ -1,7 +1,8 @@
 import { Component, input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { dummyTasks } from '../../assets/constants/dummy-tasks';
-import { ModalComponent } from "../modal/modal.component";
+import { ModalComponent } from "./add-task/modal.component";
+import { NewTaskData } from './task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -27,6 +28,14 @@ export class TasksComponent {
   }
 
   closeTaskCreation() {
+    this.isCreateTask = false;
+  }
+  onAddTask(data:NewTaskData) {
+    this.DUMMY_TASKS.unshift({
+      ...data,
+      userId:this.user()?.id,
+      id:new Date().getTime().toString(),
+    });
     this.isCreateTask = false;
   }
 }

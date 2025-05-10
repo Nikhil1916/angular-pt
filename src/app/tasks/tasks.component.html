@@ -14,4 +14,4 @@
       }
     </ul>
   </section>
-  <app-modal [isOpen]="isCreateTask" (close)="closeTaskCreation()"></app-modal>
+  <app-add-task [isOpen]="isCreateTask" (close)="closeTaskCreation()" (addTask)="onAddTask($event)"></app-add-task>
